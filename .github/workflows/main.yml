@@ -1,0 +1,29 @@
+name: Deploy to Shopify
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Create virtual environment
+      run: python -m venv venv
+    - name: Activate virtual environment
+      run: source venv/bin/activate
+    - name: Install Theme Kit
+      run: curl -s https://shopify.dev/themekit.py | sudo python3
+    - name: Verify Theme Kit
+      run: theme -v
+    - name: Check if README.md exists
+      run: find . -name "README.md"
+    - name: find folders
+      run: ls -la
+    - name: Deploy to Shopify
+      run: theme deploy
+    - name: Deactivate virtual environment
+      run: deactivate
