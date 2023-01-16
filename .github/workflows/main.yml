@@ -24,6 +24,6 @@ jobs:
     - name: find folders
       run: ls -la
     - name: Deploy to Shopify
-      run: theme deploy
+      run: theme deploy --allow-live --password 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 --themeid 141789036837 --store theme-test-development.myshopify.com
     - name: Deactivate virtual environment
       run: deactivate
